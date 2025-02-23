@@ -6,6 +6,7 @@ import com.example.greetingApp.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,11 +33,16 @@ public class GreetingController {
         return greetingService.saveGreeting(message);
     }
 
-    // ✅ UC5: Get Greeting by ID
     @GetMapping("/{id}")
     public String findGreetingById(@PathVariable Long id) {
         return greetingService.findGreetingById(id)
                 .map(Greeting::getMessage)
                 .orElse("Greeting not found!");
+    }
+
+    // ✅ UC6: List All Greetings
+    @GetMapping
+    public List<Greeting> findAllGreetings() {
+        return greetingService.findAllGreetings();
     }
 }
