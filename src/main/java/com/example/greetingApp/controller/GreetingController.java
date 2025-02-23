@@ -10,10 +10,18 @@ import org.springframework.web.bind.annotation.*;
 public class GreetingController {
 
     @Autowired
-    private GreetingService greetingService; // Injecting the service
+    private GreetingService greetingService;
 
     @GetMapping("/hello")
     public String getSimpleGreeting() {
-        return greetingService.getSimpleGreeting(); // Calling the service method
+        return greetingService.getSimpleGreeting();
+    }
+
+    // ✅ New API for UC3: Personalized Greeting
+    @GetMapping("/personalized")
+    public String getPersonalizedGreeting(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName) {
+        return greetingService.getPersonalizedGreeting(firstName, lastName);
     }
 }
