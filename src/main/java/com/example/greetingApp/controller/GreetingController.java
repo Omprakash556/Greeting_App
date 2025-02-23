@@ -45,9 +45,14 @@ public class GreetingController {
         return greetingService.findAllGreetings();
     }
 
-    // ✅ UC7: Edit a Greeting
     @PutMapping("/{id}")
     public Optional<Greeting> editGreeting(@PathVariable Long id, @RequestParam String message) {
         return greetingService.editGreeting(id, message);
+    }
+
+    // ✅ UC8: Delete a Greeting
+    @DeleteMapping("/{id}")
+    public String deleteGreeting(@PathVariable Long id) {
+        return greetingService.deleteGreeting(id) ? "Deleted successfully!" : "Greeting not found!";
     }
 }

@@ -41,11 +41,19 @@ public class GreetingService {
         return repository.findAll();
     }
 
-    // ✅ UC7: Edit an Existing Greeting
     public Optional<Greeting> editGreeting(Long id, String newMessage) {
         return repository.findById(id).map(greeting -> {
             greeting.setMessage(newMessage);
             return repository.save(greeting);
         });
+    }
+
+    // ✅ UC8: Delete a Greeting
+    public boolean deleteGreeting(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
