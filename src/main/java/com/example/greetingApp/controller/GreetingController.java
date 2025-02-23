@@ -40,9 +40,14 @@ public class GreetingController {
                 .orElse("Greeting not found!");
     }
 
-    // ✅ UC6: List All Greetings
     @GetMapping
     public List<Greeting> findAllGreetings() {
         return greetingService.findAllGreetings();
+    }
+
+    // ✅ UC7: Edit a Greeting
+    @PutMapping("/{id}")
+    public Optional<Greeting> editGreeting(@PathVariable Long id, @RequestParam String message) {
+        return greetingService.editGreeting(id, message);
     }
 }

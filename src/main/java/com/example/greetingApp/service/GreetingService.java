@@ -37,8 +37,15 @@ public class GreetingService {
         return repository.findById(id);
     }
 
-    // ✅ UC6: Fetch All Greetings from Database
     public List<Greeting> findAllGreetings() {
         return repository.findAll();
+    }
+
+    // ✅ UC7: Edit an Existing Greeting
+    public Optional<Greeting> editGreeting(Long id, String newMessage) {
+        return repository.findById(id).map(greeting -> {
+            greeting.setMessage(newMessage);
+            return repository.save(greeting);
+        });
     }
 }
